@@ -64,7 +64,7 @@ class Day3 : Puzzle(3) {
     }
 
     fun getPossibleCoords(value: Int, x: Int, y: Int): List<Pair<Int, Int>> {
-        val startY = y - 1;
+        val startY = y - 1
         val endY = y + value.toString().length
         val coords = mutableListOf<Pair<Int, Int>>()
         range(startY, endY + 1).forEach {

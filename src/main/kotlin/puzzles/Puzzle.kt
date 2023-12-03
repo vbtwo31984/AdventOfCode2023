@@ -1,9 +1,13 @@
 package puzzles
 
-abstract class Puzzle {
-    abstract val fileName: String
+abstract class Puzzle(day: Int) {
+    private val fileName: String
     protected val input: Array<String>
         get() = loadInput(fileName)
+
+    init {
+        fileName = "day$day.txt"
+    }
 
     abstract fun partOne()
     abstract fun partTwo()

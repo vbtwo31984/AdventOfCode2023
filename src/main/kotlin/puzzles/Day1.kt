@@ -1,8 +1,6 @@
 package puzzles
 
-class Day1 : Puzzle() {
-    override val fileName: String = "day1.txt"
-
+class Day1 : Puzzle(1) {
     override fun partOne() {
         val sum = input.sumOf { line -> getCalibrationValue(line) }
         println("Part 1: $sum")

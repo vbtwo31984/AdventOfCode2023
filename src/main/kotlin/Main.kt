@@ -9,7 +9,7 @@ fun main(args: Array<String>) {
 fun getPuzzle(day: String): Puzzle {
     if (day == "1") return Day1()
     if (day == "2") return Day2()
-//    if(day == "3") return Day3()
+    if(day == "3") return Day3()
 //    if(day == "4") return Day4()
 //    if(day == "5") return Day5()
 //    if(day == "6") return Day6()

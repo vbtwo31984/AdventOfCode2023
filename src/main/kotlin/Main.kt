@@ -1,7 +1,13 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import puzzles.Day1
+import puzzles.Puzzle
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+fun main(args: Array<String>) {
+    val puzzle = getPuzzle(args[0])
+    puzzle.partOne()
+    puzzle.partTwo()
+}
+
+fun getPuzzle(day: String): Puzzle {
+    if(day == "1") return Day1()
+    throw IllegalArgumentException("Day $day not found")
 }

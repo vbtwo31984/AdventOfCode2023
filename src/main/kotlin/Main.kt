@@ -11,7 +11,7 @@ fun getPuzzle(day: String): Puzzle {
     if (day == "2") return Day2()
     if(day == "3") return Day3()
     if(day == "4") return Day4()
-//    if(day == "5") return Day5()
+    if(day == "5") return Day5()
 //    if(day == "6") return Day6()
 //    if(day == "7") return Day7()
 //    if(day == "8") return Day8()

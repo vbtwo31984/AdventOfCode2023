@@ -5,6 +5,7 @@ import org.testng.annotations.Test
 
 class Day5Test {
     val mapping = Mapping("180784667 145454582 160895405")
+
     @Test
     fun testMappingInRange() {
         assertTrue(mapping.inRange(145454582))

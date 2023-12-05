@@ -2,6 +2,7 @@ package puzzles
 
 class Day5 : Puzzle(5) {
     val seeds = parseSeeds()
+    val seedRanges = parseSeedRanges()
     private val seedToSoil = getMappings(3)
     private val soilToFertilizer = getMappings(5 + seedToSoil.size)
     private val fertilizerToWater = getMappings(7 + seedToSoil.size + soilToFertilizer.size)
@@ -22,12 +23,30 @@ class Day5 : Puzzle(5) {
     }
 
     override fun partTwo() {
-        TODO("Not yet implemented")
+        val min = seedRanges.parallelStream().map {
+            var min = Long.MAX_VALUE
+            for (seed in it) {
+                min = min.coerceAtMost(allMappings.fold(seed) { acc, mappings ->
+                    getDestination(acc, mappings)
+                })
+            }
+            min
+        }.min(Comparator.naturalOrder()).get()
+        println("Part 2: $min")
     }
 
     fun parseSeeds(): List<Long> {
         val seeds = input[0].split(' ').drop(1)
         return seeds.map { it.toLong() }
+    }
+
+    fun parseSeedRanges(): List<LongRange> {
+        val seeds = parseSeeds()
+        val seedRanges = mutableListOf<LongRange>()
+        for(i in seeds.indices step 2) {
+            seedRanges.add(seeds[i]..seeds[i + 1] + seeds[i])
+        }
+        return seedRanges
     }
 
     fun getMappings(startLine: Int): List<Mapping> {
@@ -56,6 +75,8 @@ class Mapping(line: String) {
     private val destinationStart: Long
     private val sourceStart: Long
     private val rangeLength: Long
+    val sourceEnd: Long
+        get() = sourceStart + rangeLength
 
     init {
         val split = line.split(' ')
@@ -65,7 +86,7 @@ class Mapping(line: String) {
     }
 
     fun inRange(num: Long): Boolean {
-        return num >= sourceStart && num <= sourceStart + rangeLength
+        return num in sourceStart..sourceEnd
     }
 
     fun getDestination(num: Long): Long {

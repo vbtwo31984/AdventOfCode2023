@@ -18,34 +18,30 @@ class Day9 : Puzzle(9) {
     }
 
     fun getNextInSequence(sequence: List<Long>): Long {
-        if (sequence.size == 1) {
-            return sequence[0]
-        }
         if (sequence.all { it == 0L }) {
             return 0L
         }
 
-        val next = mutableListOf<Long>()
-        for (i in 0..sequence.size - 2) {
-            next.add(sequence[i + 1] - sequence[i])
-        }
+        val next = getNextSequence(sequence)
         val nextInSequence = getNextInSequence(next)
         return sequence.last() + nextInSequence
     }
 
     fun getPreviousInSequence(sequence: List<Long>): Long {
-        if (sequence.size == 1) {
-            return sequence[0]
-        }
         if (sequence.all { it == 0L }) {
             return 0L
         }
 
+        val next = getNextSequence(sequence)
+        val prevInSequence = getPreviousInSequence(next)
+        return sequence.first() - prevInSequence
+    }
+
+    private fun getNextSequence(sequence: List<Long>): MutableList<Long> {
         val next = mutableListOf<Long>()
         for (i in 0..sequence.size - 2) {
             next.add(sequence[i + 1] - sequence[i])
         }
-        val prevInSequence = getPreviousInSequence(next)
-        return sequence.first() - prevInSequence
+        return next
     }
 }

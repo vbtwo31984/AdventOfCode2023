@@ -29,7 +29,15 @@ class Day10 : Puzzle(10) {
         loop.forEach {
             drawing[it.first][it.second] = input[it.first][it.second]
         }
-        println("Part 2:")
+
+        val numInside = input.mapIndexed { y, row ->
+            val filtered = row.filterIndexed { x, _ ->
+                isInside(y to x, loop)
+            }
+            filtered.length
+        }.sum()
+
+        println("Part 2: $numInside")
         drawing.forEach { row ->
             row.forEach {
                 print(it)
@@ -38,7 +46,7 @@ class Day10 : Puzzle(10) {
         }
     }
 
-    fun findStart(): Pair<Int, Int> {
+    private fun findStart(): Pair<Int, Int> {
         for (y in input.indices) {
             val x = input[y].indexOf('S')
             if (x != -1) {
@@ -48,7 +56,7 @@ class Day10 : Puzzle(10) {
         throw IllegalArgumentException()
     }
 
-    fun findNext(cur: Pair<Int, Int>, prev: Pair<Int, Int>): Pair<Int, Int> {
+    private fun findNext(cur: Pair<Int, Int>, prev: Pair<Int, Int>): Pair<Int, Int> {
         val curChar = input[cur.first].elementAt(cur.second)
         val possibilities = when (curChar) {
             '│' -> listOf(cur.first - 1 to cur.second, cur.first + 1 to cur.second)
@@ -62,9 +70,35 @@ class Day10 : Puzzle(10) {
         return possibilities.find { it != prev }!!
     }
 
-    fun createDrawing(): MutableList<MutableList<Char>> {
+    private fun createDrawing(): MutableList<MutableList<Char>> {
         return input.map {
             it.toCharArray().map { '.' }.toMutableList()
         }.toMutableList()
+    }
+
+    private fun isInside(coord: Pair<Int, Int>, loop: List<Pair<Int, Int>>): Boolean {
+        setOf('│', '└', '┘', '┐', '┌')
+        var nextWall: Char? = null
+        val loopSet = loop.toSet()
+        var hits = 0
+        if (coord !in loopSet) {
+            val y = coord.first
+            for (x in coord.second + 1..<input[y].length) {
+                val value = input[y][x]
+                val inLoop = loop.contains(y to x)
+                if (inLoop && nextWall != null) {
+                    if (value == '─') continue
+                    if (value == nextWall)
+                        hits++
+
+                    nextWall = null
+                } else if (inLoop) {
+                    if (value == '┌') nextWall = '┘'
+                    else if (value == '└') nextWall = '┐'
+                    else if (value != '─') hits++
+                }
+            }
+        }
+        return hits % 2 == 1
     }
 }

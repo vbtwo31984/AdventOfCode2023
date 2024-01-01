@@ -1,6 +1,10 @@
 import puzzles.*
 
 fun main(args: Array<String>) {
+    if (args.isEmpty()) {
+        println("Pass in day number to run")
+        return
+    }
     val puzzle = getPuzzle(args[0])
     puzzle.partOne()
     puzzle.partTwo()
@@ -19,18 +23,18 @@ fun getPuzzle(day: String): Puzzle {
     if (day == "10") return Day10()
     if (day == "11") return Day11()
     if (day == "12") return Day12()
-//    if(day == "13") return Day13()
-//    if(day == "14") return Day14()
-//    if(day == "15") return Day15()
-//    if(day == "16") return Day16()
-//    if(day == "17") return Day17()
-//    if(day == "18") return Day18()
-//    if(day == "19") return Day19()
-//    if(day == "20") return Day20()
-//    if(day == "21") return Day21()
-//    if(day == "22") return Day22()
-//    if(day == "23") return Day23()
-//    if(day == "24") return Day24()
-//    if(day == "25") return Day25()
+    //    if(day == "13") return Day13()
+    //    if(day == "14") return Day14()
+    //    if(day == "15") return Day15()
+    //    if(day == "16") return Day16()
+    //    if(day == "17") return Day17()
+    //    if(day == "18") return Day18()
+    //    if(day == "19") return Day19()
+    //    if(day == "20") return Day20()
+    //    if(day == "21") return Day21()
+    //    if(day == "22") return Day22()
+    //    if(day == "23") return Day23()
+    //    if(day == "24") return Day24()
+    //    if(day == "25") return Day25()
     throw IllegalArgumentException("Day $day not found")
 }

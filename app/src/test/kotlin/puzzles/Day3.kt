@@ -1,7 +1,7 @@
 package puzzles
 
-import org.testng.Assert.*
-import org.testng.annotations.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
 class Day3Test {
     val puzzle = Day3()
@@ -15,6 +15,7 @@ class Day3Test {
             "......755.\n" +
             "...\$.*....\n" +
             ".664.598..").split("\n").toTypedArray()
+
     @Test
     fun testGetNumberWithCoord() {
         val input = "..35..633."

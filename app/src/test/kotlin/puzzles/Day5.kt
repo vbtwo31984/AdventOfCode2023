@@ -1,7 +1,7 @@
 package puzzles
 
-import org.testng.Assert.*
-import org.testng.annotations.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
 class Day5Test {
     val mapping = Mapping("180784667 145454582 160895405")

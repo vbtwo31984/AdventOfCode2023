@@ -1,13 +1,14 @@
 package puzzles
 
-import org.testng.Assert.assertEquals
-import org.testng.annotations.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day6Test {
     val puzzle = Day6()
+
     @Test
     fun testFindDistance() {
-        assertEquals(puzzle.findDistance(1, 7),6)
+        assertEquals(puzzle.findDistance(1, 7), 6)
         assertEquals(puzzle.findDistance(2, 7), 10)
         assertEquals(puzzle.findDistance(3, 7), 12)
         assertEquals(puzzle.findDistance(4, 7), 12)

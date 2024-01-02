@@ -1,7 +1,7 @@
 package puzzles
 
-import org.testng.Assert.assertEquals
-import org.testng.annotations.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day4Test {
     val puzzle = Day4()
